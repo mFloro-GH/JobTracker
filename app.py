@@ -1,5 +1,5 @@
 from tracker import load_applications
-
+from menu import display_applications
 
 def main():
     while True:
@@ -15,9 +15,7 @@ def main():
 
         if choice == "1":
             applications = load_applications()
-
-            for application in applications:
-                print(application)
+            display_applications(applications)
 
         elif choice == "4":
             print("Goodbye!")
