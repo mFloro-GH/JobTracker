@@ -1,5 +1,10 @@
 from tracker import load_applications
+from tracker import add_application
+from tracker import save_applications
 from menu import display_applications
+from menu import get_application_input
+
+
 
 def main():
     while True:
@@ -16,6 +21,11 @@ def main():
         if choice == "1":
             applications = load_applications()
             display_applications(applications)
+
+        elif choice == "2":
+            new_application = get_application_input()
+            add_application(new_application)
+            print("Application added successfully!")
 
         elif choice == "4":
             print("Goodbye!")
