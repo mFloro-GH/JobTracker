@@ -42,6 +42,8 @@ def load_applications():
 
 
 def add_application(new_application):
+    new_application["ApplicationID"] = generate_application_id()
+
     applications = load_applications()
     applications.append(new_application)
     save_applications(applications)
@@ -60,3 +62,21 @@ def save_applications(applications):
 
         for application in applications:
             writer.writerow(application)
+
+def generate_application_id():
+    applications = load_applications()
+
+    highest_id = 0
+
+    for application in applications:
+        application_id = application["ApplicationID"]
+
+        if application_id:
+            current_id = int(application_id[4:])
+
+            if current_id > highest_id:
+                highest_id = current_id
+
+    next_id = highest_id + 1
+
+    return f"APP-{next_id:04}"

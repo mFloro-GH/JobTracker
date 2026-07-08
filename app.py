@@ -1,6 +1,5 @@
 from tracker import load_applications
 from tracker import add_application
-from tracker import save_applications
 from menu import display_applications
 from menu import get_application_input
 
