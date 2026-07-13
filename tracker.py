@@ -1,4 +1,5 @@
 import csv
+from datetime import date
 
 CSV_FIELDS = [
     "ApplicationID",
@@ -40,10 +41,16 @@ def load_applications():
 
     return applications
 
+def get_todays_date():
+    today = date.today().isoformat()
+    return today
 
 def add_application(new_application):
     new_application["ApplicationID"] = generate_application_id()
-
+    new_application["DateApplied"] = get_todays_date()
+    new_application["CurrentStatus"] = "Applied"
+    new_application["InterviewCount"] = 0
+    new_application["CurrentStage"] = "Application Submitted"
     applications = load_applications()
     applications.append(new_application)
     save_applications(applications)
