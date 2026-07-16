@@ -28,3 +28,11 @@ def get_application_input():
     }
 
     return application
+
+def display_application_details(application):
+    print("=" * 50)
+    print("Application Details")
+    print("=" * 50)
+
+    for field, value in application.items():
+        print(f"{field:<20}: {value}")
