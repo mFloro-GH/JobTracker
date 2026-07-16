@@ -97,6 +97,16 @@ def find_application_by_id(application_id):
 
     return None
 
-#tests for find_application_by_id()
-#print(find_application_by_id("APP-0016"))
-#print(find_application_by_id("APP-9999"))
+def update_application_status(application_id, new_status):
+    applications = load_applications()
+
+    for application in applications:
+        if application["ApplicationID"] == application_id:
+            old_status = application["CurrentStatus"]
+            application["CurrentStatus"] = new_status
+
+            save_applications(applications)
+
+            return old_status
+
+    return None

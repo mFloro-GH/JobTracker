@@ -1,6 +1,7 @@
 from tracker import find_application_by_id
 from tracker import load_applications
 from tracker import add_application
+from tracker import update_application_status
 from menu import display_applications
 from menu import get_application_input
 from menu import display_application_details
@@ -28,6 +29,17 @@ def main():
             new_application = get_application_input()
             add_application(new_application)
             print("Application added successfully!")
+
+        elif choice == "3":
+            application_id = input("Enter Application ID: ").strip().upper()
+            new_status = input("Enter new status: ").strip()
+
+            old_status = update_application_status(application_id, new_status)
+
+            if old_status is not None:
+                print(f"Status updated: {old_status} -> {new_status}")
+            else:
+                print("Application not found.")
 
         elif choice == "4":
             application_id = input("Enter Application ID: ").strip().upper()
