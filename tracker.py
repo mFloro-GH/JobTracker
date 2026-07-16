@@ -87,3 +87,16 @@ def generate_application_id():
     next_id = highest_id + 1
 
     return f"APP-{next_id:04}"
+
+def find_application_by_id(application_id):
+    applications = load_applications()
+
+    for application in applications:
+        if application["ApplicationID"] == application_id:
+            return application
+
+    return None
+
+#tests for find_application_by_id()
+#print(find_application_by_id("APP-0016"))
+#print(find_application_by_id("APP-9999"))
