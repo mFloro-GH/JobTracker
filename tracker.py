@@ -110,3 +110,15 @@ def update_application_status(application_id, new_status):
             return old_status
 
     return None
+    
+def search_applications(search_term):
+    matches = []
+    applications = load_applications()
+
+    for application in applications:
+        if search_term.lower() in application["Company"].lower():
+            matches.append(application)
+
+    return matches
+
+print(search_applications("Toyota"))

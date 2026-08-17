@@ -2,6 +2,7 @@ from tracker import find_application_by_id
 from tracker import load_applications
 from tracker import add_application
 from tracker import update_application_status
+from tracker import search_applications
 from menu import display_applications
 from menu import get_application_input
 from menu import display_application_details
@@ -17,7 +18,8 @@ def main():
         print("2. Add Application")
         print("3. Update Status")
         print("4. View Application Details")
-        print("5. Exit")
+        print("5. Search Applications")
+        print("6. Exit")
 
         choice = input("Enter your choice: ")
 
@@ -51,6 +53,15 @@ def main():
                 print("Application not found.")
 
         elif choice == "5":
+            search_term = input("Enter company name: ").strip()
+            matches = search_applications(search_term)
+
+            if matches:
+                display_applications(matches)
+            else:
+                print("No matching applications found.")
+
+        elif choice == "6":
             print("Goodbye!")
             break
 
