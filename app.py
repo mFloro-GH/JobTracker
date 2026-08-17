@@ -3,6 +3,8 @@ from tracker import load_applications
 from tracker import add_application
 from tracker import update_application_status
 from tracker import search_applications
+from tracker import update_application_field
+from menu import get_field_selection
 from menu import display_applications
 from menu import get_application_input
 from menu import display_application_details
@@ -19,7 +21,8 @@ def main():
         print("3. Update Status")
         print("4. View Application Details")
         print("5. Search Applications")
-        print("6. Exit")
+        print("6. Edit Application")
+        print("7. Exit")
 
         choice = input("Enter your choice: ")
 
@@ -47,10 +50,11 @@ def main():
             application_id = input("Enter Application ID: ").strip().upper()
             application = find_application_by_id(application_id)
 
-            if application:
-                display_application_details(application)
-            else:
+            if application is None:
                 print("Application not found.")
+                continue
+
+            display_application_details(application)
 
         elif choice == "5":
             search_term = input("Enter company name: ").strip()
@@ -62,6 +66,28 @@ def main():
                 print("No matching applications found.")
 
         elif choice == "6":
+            application_id = input("Enter Application ID: ").strip().upper()
+            application = find_application_by_id(application_id)
+
+            if application is None:
+                print("Application not found.")
+                continue
+
+            field_name = get_field_selection()
+
+            if field_name is not None:
+                new_value = input(f"Enter new value for {field_name}: ").strip()
+
+                updated = update_application_field(
+                    application_id,
+                    field_name,
+                    new_value
+                )
+
+                if updated:
+                    print("Application updated successfully!")
+
+        elif choice == "7":
             print("Goodbye!")
             break
 

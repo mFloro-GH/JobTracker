@@ -88,7 +88,16 @@ def generate_application_id():
 
     return f"APP-{next_id:04}"
 
+def normalize_application_id(application_id):
+    application_id = application_id.strip().upper()
+
+    if application_id.startswith("APP-"):
+        return application_id
+
+    return f"APP-{application_id.zfill(4)}"
+
 def find_application_by_id(application_id):
+    application_id = normalize_application_id(application_id)
     applications = load_applications()
 
     for application in applications:
@@ -98,6 +107,7 @@ def find_application_by_id(application_id):
     return None
 
 def update_application_status(application_id, new_status):
+    application_id = normalize_application_id(application_id)
     applications = load_applications()
 
     for application in applications:
@@ -121,4 +131,14 @@ def search_applications(search_term):
 
     return matches
 
-print(search_applications("Toyota"))
+def update_application_field(application_id, field_name, new_value):
+    application_id = normalize_application_id(application_id)
+    applications = load_applications()
+
+    for application in applications:
+        if application["ApplicationID"] == application_id:
+            application[field_name] = new_value
+            save_applications(applications)
+            return True
+
+    return False
